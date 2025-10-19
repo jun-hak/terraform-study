@@ -9,7 +9,7 @@ terraform {
 
 locals {
   base_path = "${path.module}/configs/${local.upper_case}"
-  envrionment = "dev" #dev, stg, prd
+  envrionment = "prd" #dev, stg, prd
   upper_case = upper(local.envrionment)
 }
 
@@ -35,4 +35,9 @@ resource "local_file" "service_configs" {
     environment = ${local.envrionment}
     port = 3000
     EOF
+}
+
+output "filename_1" {
+    value=local_file.service_configs.filename
+  
 }
